@@ -12,7 +12,7 @@ def check_env_file():
     """
     env_file = find_dotenv()
     if not env_file:
-        False, (
+        return False, (
             "Missing .env file. Please create a .env file and include the following content:\n\n"
             "```\n"
             "AZURE_OPENAI_ENDPOINT=<your_azure_openai_endpoint>\n"

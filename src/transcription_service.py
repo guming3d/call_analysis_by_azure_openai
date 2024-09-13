@@ -69,13 +69,14 @@ class TranscriptionService:
         conversation_transcriber.session_stopped.connect(stop_cb)
         conversation_transcriber.canceled.connect(stop_cb)
 
-        conversation_transcriber.start_transcribing_async()
+        try:
+            conversation_transcriber.start_transcribing_async()
 
-        # Waits for completion.
-        while not transcribing_stop:
-            time.sleep(.5)
-
-        conversation_transcriber.stop_transcribing_async()
+            # Waits for completion.
+            while not transcribing_stop:
+                time.sleep(.5)
+        finally:
+            conversation_transcriber.stop_transcribing_async()
 
         recognized_text = ' '.join(all_recognized_text)
 
