@@ -22,6 +22,12 @@ def main():
     # Process each file
     for audio_file in file_ingestion.get_audio_files():
         try:
+            # Check if the result JSON file already exists
+            result_json_file = os.path.join(output_directory, os.path.basename(audio_file).replace('.mp3', '.json').replace('.wav', '.json'))
+            if os.path.exists(result_json_file):
+                logger.info(f"Result JSON file already exists for {audio_file}, skipping transcription and analysis.")
+                continue
+
             # Transcription
             transcription_result = transcription_service.recognize_from_file(audio_file)
             logger.info(f"Transcription Result: {transcription_result}")
