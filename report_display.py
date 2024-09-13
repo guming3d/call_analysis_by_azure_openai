@@ -15,7 +15,8 @@ def display_report():
             data = json.load(f)
         
         st.subheader(f"Report for {json_file}")
-        st.json(data)
+        with st.expander(f"Details for {json_file}", expanded=False):
+            st.json(data)
 
 if __name__ == "__main__":
     display_report()
