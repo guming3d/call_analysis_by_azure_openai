@@ -5,36 +5,8 @@
 This project is designed to transcribe audio files, analyze the transcriptions using Azure OpenAI, and generate reports in both Excel and Markdown formats. The primary use case is to review the effectiveness of sales calls and provide feedback for improvement.
 
 ## Architecture Diagram
-# EF Call Analysis Project
-
-## Overview
-
-This project is designed to transcribe audio files, analyze the transcriptions using Azure OpenAI, and generate reports in both Excel and Markdown formats. The primary use case is to review the effectiveness of sales calls and provide feedback for improvement.
-
-## Architecture Diagram
 
 ![Architecture Diagram](architecture/calling_analyze.drawio.png)
-
-## Prerequisites
-
-- Python 3.12 or higher
-- pip (Python package installer)
-- Azure subscription with access to Azure Cognitive Services and Azure OpenAI
-
-## Setup
-
-1. **Clone the repository:**
-
-    ```bash
-    git clone <repository_url>
-    cd EF_call_analysis
-
-
-## Prerequisites
-
-- Python 3.12 or higher
-- pip (Python package installer)
-- Azure subscription with access to Azure Cognitive Services and Azure OpenAI
 
 ## Setup
 
