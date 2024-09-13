@@ -83,7 +83,7 @@ class TranscriptionService:
             print('SessionStopped event')
 
         def conversation_transcriber_transcribed_cb(evt: speechsdk.SpeechRecognitionEventArgs):
-            print('TRANSCRIBED:')
+            # print('TRANSCRIBED:')
             if evt.result.reason == speechsdk.ResultReason.RecognizedSpeech:
                 # print('\tSpeaker ID={}'.format(evt.result.speaker_id))
                 all_recognized_text.append(evt.result.speaker_id + ":")
