@@ -72,7 +72,14 @@ class TranscriptionService:
         # Combine all recognized text into a single string
         self.logger.info(f"Transcription complete for {audio_file}")
         self.logger.info(f"Recognized text: {all_recognized_text}")
-        return ' '.join(all_recognized_text)
+        recognized_text = ' '.join(all_recognized_text)
+        
+        # Remove the converted WAV file if the original was an MP3
+        if audio_file.endswith('.wav') and os.path.exists(audio_file):
+            os.remove(audio_file)
+            self.logger.info(f"Removed temporary WAV file: {audio_file}")
+        
+        return recognized_text
     
 
     def recognize_from_file(self,  audio_file: str ):
