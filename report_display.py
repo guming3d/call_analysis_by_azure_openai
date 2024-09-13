@@ -3,6 +3,7 @@ import json
 import streamlit as st
 
 def display_report():
+    st.set_page_config(layout="wide")
     st.title("EF Call Analysis Report")
 
     output_directory = './output'
