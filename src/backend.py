@@ -23,7 +23,13 @@ def check_env_file():
     
     load_dotenv(env_file)
     
-    required_vars = ["AZURE_OPENAI_ENDPOINT", "AZURE_OPENAI_DEPLOYMENT_NAME", "AZURE_OPENAI_API_KEY"]
+    required_vars = [
+        "AZURE_SUBSCRIPTION_KEY",
+        "AZURE_REGION",
+        "AZURE_OPENAI_ENDPOINT",
+        "AZURE_OPENAI_DEPLOYMENT_NAME",
+        "AZURE_OPENAI_API_KEY"
+    ]
     missing_vars = [var for var in required_vars if not os.getenv(var)]
     
     if missing_vars:

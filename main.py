@@ -1,4 +1,5 @@
 import os
+import sys
 from src.file_ingestion import FileIngestion
 from src.transcription_service import TranscriptionService
 from src.output_generator import OutputGenerator
@@ -10,6 +11,13 @@ from src.generate_report import generate_report
 
 def main():
     logger = Logger()
+
+    # Check .env file
+    from src.backend import check_env_file
+    env_valid, env_error = check_env_file()
+    if not env_valid:
+        logger.error(env_error)
+        sys.exit(1)
     
     # Set directories
     input_directory = './audios'
