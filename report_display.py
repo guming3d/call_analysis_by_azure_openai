@@ -4,7 +4,7 @@ import streamlit as st
 
 def display_report():
     st.set_page_config(layout="wide")
-    st.title("EF Call Analysis Report")
+    st.title("Call Analysis Report")
 
     output_directory = './output'
     json_files = [f for f in os.listdir(output_directory) if f.endswith('.json')]

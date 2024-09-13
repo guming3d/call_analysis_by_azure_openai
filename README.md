@@ -1,4 +1,4 @@
-# EF Call Analysis Project
+# Call Analysis Project
 
 ## Overview
 
@@ -61,6 +61,9 @@ This project is designed to transcribe audio files, analyze the transcriptions u
 ## View the Report
 
 To view the report in a web interface, you can use the `report_display.py` script which utilizes Streamlit to render the JSON content in a table format.
+
+screenshot:
+![screenshot](screenshot/screenshot.jpeg)
 
 1. **Run the Streamlit app:**
 
@@ -131,6 +134,9 @@ To view the report in a web interface, you can use the `report_display.py` scrip
 ### 查看报告
 
 要在 Web 界面中查看报告，您可以使用 `report_display.py` 脚本，该脚本利用 Streamlit 以表格格式呈现 JSON 内容。
+
+截图:
+![screenshot](screenshot/screenshot.jpeg)
 
 1. **运行 Streamlit 应用程序:**
 
