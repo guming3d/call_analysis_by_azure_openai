@@ -1,5 +1,6 @@
 import os
 import time
+from pydub import AudioSegment
 from dotenv import load_dotenv
 
 import azure.cognitiveservices.speech as speechsdk
@@ -23,6 +24,11 @@ class TranscriptionService:
     
     def transcribe(self, audio_file: str):
         self.logger.info(f"Transcribing file: {audio_file}")
+        if audio_file.endswith('.mp3'):
+            wav_file = audio_file.replace('.mp3', '.wav')
+            AudioSegment.from_mp3(audio_file).export(wav_file, format='wav')
+            audio_file = wav_file
+
         audio_config = speechsdk.audio.AudioConfig(filename=audio_file)
         recognizer = speechsdk.SpeechRecognizer(speech_config=self.speech_config, language='zh-CN', audio_config=audio_config)
         # recognizer = speechsdk.transcription.ConversationTranscriber(speech_config=self.speech_config, language='zh-CN', audio_config=audio_config)
