@@ -29,7 +29,7 @@ def main():
             analysis_result = generate_content_azure(generate_system_prompt(), transcription_result, max_tokens=600)
             
             # Output Generation
-            output_generator.generate_output(audio_file, analysis_result)
+            output_generator.generate_output(audio_file, analysis_result, transcription_result)
         except Exception as e:
             logger.error(f"Error processing {audio_file}: {e}")
 
