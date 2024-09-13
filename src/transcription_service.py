@@ -22,67 +22,13 @@ class TranscriptionService:
         
         self.speech_config.enable_dictation()
     
-    def transcribe(self, audio_file: str):
-        self.logger.info(f"Transcribing file: {audio_file}")
+    def recognize_from_file(self,  audio_file: str ):
+        original_audio_file = audio_file
         if audio_file.endswith('.mp3'):
             wav_file = audio_file.replace('.mp3', '.wav')
             AudioSegment.from_mp3(audio_file).export(wav_file, format='wav')
             audio_file = wav_file
 
-        audio_config = speechsdk.audio.AudioConfig(filename=audio_file)
-        recognizer = speechsdk.SpeechRecognizer(speech_config=self.speech_config, language='zh-CN', audio_config=audio_config)
-        # recognizer = speechsdk.transcription.ConversationTranscriber(speech_config=self.speech_config, language='zh-CN', audio_config=audio_config)
-        
-        done = False
-        all_recognized_text = []  # List to store all recognized text
-
-        def stop_cb(evt: speechsdk.SessionEventArgs):
-            """Callback that signals to stop continuous recognition upon receiving an event `evt`."""
-            print(f'CLOSING on {evt}')
-            nonlocal done
-            done = True
-
-        def recognized_cb(evt: speechsdk.SpeechRecognitionEventArgs):
-            """Callback to handle recognized text."""
-            if evt.result.reason == speechsdk.ResultReason.RecognizedSpeech:
-                print(f'RECOGNIZED: {evt.result.text}')
-                all_recognized_text.append(evt.result.text)
-            elif evt.result.reason == speechsdk.ResultReason.NoMatch:
-                print("No speech could be recognized.")
-
-        # Connect callbacks to the events fired by the speech recognizer
-        recognizer.recognized.connect(lambda evt: print(f'RECOGNIZING: {evt.result.text}'))
-        recognizer.recognized.connect(recognized_cb)
-        recognizer.session_started.connect(lambda evt: print(f'SESSION STARTED: {evt}'))
-        recognizer.session_stopped.connect(lambda evt: print(f'SESSION STOPPED {evt}'))
-        recognizer.canceled.connect(lambda evt: print(f'CANCELED {evt}'))
-
-        # Stop continuous recognition on either session stopped or canceled events
-        recognizer.session_stopped.connect(stop_cb)
-        recognizer.canceled.connect(stop_cb)
-
-        # Start continuous speech recognition
-        recognizer.start_continuous_recognition()
-
-        while not done:
-            time.sleep(.5)
-
-        recognizer.stop_continuous_recognition()
-
-        # Combine all recognized text into a single string
-        self.logger.info(f"Transcription complete for {audio_file}")
-        self.logger.info(f"Recognized text: {all_recognized_text}")
-        recognized_text = ' '.join(all_recognized_text)
-        
-        # Remove the converted WAV file if the original was an MP3
-        if audio_file.endswith('.wav') and os.path.exists(audio_file):
-            os.remove(audio_file)
-            self.logger.info(f"Removed temporary WAV file: {audio_file}")
-        
-        return recognized_text
-    
-
-    def recognize_from_file(self,  audio_file: str ):
         audio_config = speechsdk.audio.AudioConfig(filename=audio_file)
         conversation_transcriber = speechsdk.transcription.ConversationTranscriber(speech_config=self.speech_config, language='zh-CN',audio_config=audio_config)
 
@@ -131,4 +77,11 @@ class TranscriptionService:
 
         conversation_transcriber.stop_transcribing_async()
 
-        return ' '.join(all_recognized_text)
+        recognized_text = ' '.join(all_recognized_text)
+
+        # Remove the converted WAV file if the original was an MP3
+        if original_audio_file.endswith('.mp3') and os.path.exists(audio_file):
+            os.remove(audio_file)
+            self.logger.info(f"Removed temporary WAV file: {audio_file}")
+ 
+        return recognized_text

@@ -5,6 +5,10 @@ def generate_system_prompt():
 ```json
 [
     {{
+        "是否邀约成功"：xxx,
+        "对话人身份"：xxx,
+        "参与课程对象年龄"：xxx,
+        "邀约的整体情况"：xxx,
         "目前学习需求"：xxx,
         "目前学习痛点"：xxx,
         "家里学习决策人"：xxx,
