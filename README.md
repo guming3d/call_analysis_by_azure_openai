@@ -58,6 +58,18 @@ This project is designed to transcribe audio files, analyze the transcriptions u
 
     The transcriptions and analysis results will be saved in the `./output` directory. Reports will be generated as `report.xlsx` and `report.md`.
 
+## View the Report
+
+To view the report in a web interface, you can use the `report_display.py` script which utilizes Streamlit to render the JSON content in a table format.
+
+1. **Run the Streamlit app:**
+
+    ```bash
+    streamlit run report_display.py
+    ```
+
+2. **Open the provided URL in your browser to view the report.**
+
 ## 中文说明
 
 ### 概述
