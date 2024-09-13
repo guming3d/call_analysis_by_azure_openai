@@ -1,0 +1,11 @@
+audio_transcription/
+│
+├── src/
+│   ├── file_ingestion.py
+│   ├── transcription_service.py
+│   ├── analysis_service.py
+│   ├── output_generator.py
+│   ├── logger.py
+│   └── main.py
+│
+└── requirements.txt
