@@ -4,6 +4,7 @@ from src.output_generator import OutputGenerator
 from src.backend import generate_content_azure 
 from src.prompt import generate_system_prompt
 from src.logger import Logger
+from generate_report import generate_report
 
 
 def main():
@@ -32,6 +33,9 @@ def main():
             output_generator.generate_output(audio_file, analysis_result, transcription_result)
         except Exception as e:
             logger.error(f"Error processing {audio_file}: {e}")
+
+    # Generate report
+    generate_report(output_directory, 'report.xlsx', 'report.md')
 
 if __name__ == "__main__":
     main()
