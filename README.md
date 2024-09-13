@@ -70,6 +70,18 @@ To view the report in a web interface, you can use the `report_display.py` scrip
 
 2. **Open the provided URL in your browser to view the report.**
 
+## View the Report
+
+To view the report in a web interface, you can use the `report_display.py` script which utilizes Streamlit to render the JSON content in a table format.
+
+1. **Run the Streamlit app:**
+
+    ```bash
+    streamlit run report_display.py
+    ```
+
+2. **Open the provided URL in your browser to view the report.**
+
 ## 中文说明
 
 ### 概述
@@ -115,6 +127,18 @@ To view the report in a web interface, you can use the `report_display.py` scrip
     AZURE_OPENAI_DEPLOYMENT_NAME=<your_azure_openai_deployment_name>
     AZURE_OPENAI_API_KEY=<your_azure_openai_api_key>
     ```
+
+### 查看报告
+
+要在 Web 界面中查看报告，您可以使用 `report_display.py` 脚本，该脚本利用 Streamlit 以表格格式呈现 JSON 内容。
+
+1. **运行 Streamlit 应用程序:**
+
+    ```bash
+    streamlit run report_display.py
+    ```
+
+2. **在浏览器中打开提供的 URL 以查看报告。**
 
 ### 使用方法
 
