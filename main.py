@@ -1,3 +1,4 @@
+import os
 from src.file_ingestion import FileIngestion
 from src.transcription_service import TranscriptionService
 from src.output_generator import OutputGenerator
