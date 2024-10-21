@@ -33,6 +33,7 @@ def main():
     os.makedirs(input_directory, exist_ok=True)
     os.makedirs(output_directory, exist_ok=True)
     os.makedirs(transcription_directory, exist_ok=True)
+
     file_ingestion = FileIngestion(input_directory, logger)
     transcription_service = TranscriptionService(logger)
     output_generator = OutputGenerator(output_directory, logger)
