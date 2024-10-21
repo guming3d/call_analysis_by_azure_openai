@@ -47,9 +47,14 @@ def main():
                 logger.info(f"Result JSON file already exists for {audio_file}, skipping transcription and analysis.")
                 continue
 
-            if args.replay:
+            transcription_file = os.path.join(transcription_directory, os.path.basename(audio_file).replace('.mp3', '.txt').replace('.wav', '.txt'))
+            
+            if os.path.exists(transcription_file):
+                with open(transcription_file, 'r') as file:
+                    transcription_result = file.read()
+                logger.info(f"Loaded Transcription Result from file: {transcription_file}")
+            elif args.replay:
                 # Read transcription from file
-                transcription_file = os.path.join(transcription_directory, os.path.basename(audio_file).replace('.mp3', '.txt').replace('.wav', '.txt'))
                 with open(transcription_file, 'r') as file:
                     transcription_result = file.read()
                 logger.info(f"Loaded Transcription Result from file: {transcription_file}")
