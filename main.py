@@ -1,5 +1,6 @@
 import os
 import sys
+import argparse
 from src.file_ingestion import FileIngestion
 from src.transcription_service import TranscriptionService
 from src.output_generator import OutputGenerator
@@ -10,6 +11,10 @@ from src.generate_report import generate_report
 
 
 def main():
+    parser = argparse.ArgumentParser(description="Process audio files.")
+    parser.add_argument('--replay', action='store_true', help="Use existing transcriptions from the 'transcription' directory.")
+    args = parser.parse_args()
+
     logger = Logger()
 
     # Check .env file
@@ -22,6 +27,7 @@ def main():
     # Set directories
     input_directory = './audios'
     output_directory = './output'
+    transcription_directory = './transcription'
     
     # Initialize components
     file_ingestion = FileIngestion(input_directory, logger)
@@ -37,10 +43,23 @@ def main():
                 logger.info(f"Result JSON file already exists for {audio_file}, skipping transcription and analysis.")
                 continue
 
-            # Transcription
-            transcription_result = transcription_service.recognize_from_file(audio_file)
-            logger.info(f"Transcription Result: {transcription_result}")
-            
+            if args.replay:
+                # Read transcription from file
+                transcription_file = os.path.join(transcription_directory, os.path.basename(audio_file).replace('.mp3', '.txt').replace('.wav', '.txt'))
+                with open(transcription_file, 'r') as file:
+                    transcription_result = file.read()
+                logger.info(f"Loaded Transcription Result from file: {transcription_file}")
+            else:
+                # Transcription
+                transcription_result = transcription_service.recognize_from_file(audio_file)
+                logger.info(f"Transcription Result: {transcription_result}")
+
+                # Save transcription to file
+                transcription_file = os.path.join(transcription_directory, os.path.basename(audio_file).replace('.mp3', '.txt').replace('.wav', '.txt'))
+                with open(transcription_file, 'w') as file:
+                    file.write(transcription_result)
+                logger.info(f"Saved Transcription Result to file: {transcription_file}")
+
             # Analysis by Azure OpenAI
             analysis_result = generate_content_azure(generate_system_prompt(), transcription_result, max_tokens=600)
             
