@@ -69,7 +69,7 @@ def generate_content_azure(system_prompt, user_input, temperature=0.3, top_p=0.9
     Returns:
         str: The generated content.
     """
-    url = f"{AZURE_OPENAI_ENDPOINT}/openai/deployments/{AZURE_OPENAI_DEPLOYMENT_NAME}/chat/completions?api-version=2024-02-15-preview"
+    url = f"{AZURE_OPENAI_ENDPOINT}/openai/deployments/{AZURE_OPENAI_DEPLOYMENT_NAME}/chat/completions?api-version=2024-08-01-preview"
     payload = {
         "messages": [
             {"role": "system", "content": f"{system_prompt}"},
@@ -83,6 +83,7 @@ def generate_content_azure(system_prompt, user_input, temperature=0.3, top_p=0.9
             }
     }
     try:
+        print(headers)
         response = requests.post(url, headers=headers, json=payload)
         response.raise_for_status()
         return response.json()['choices'][0]['message']['content'].strip()
