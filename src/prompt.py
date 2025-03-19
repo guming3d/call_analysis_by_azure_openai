@@ -19,19 +19,18 @@ CC
 【计划什么时候开始学】
 """
 
-
 def generate_system_prompt():
     system_prompt = """
-    You are an Business Development Manager in China education firm named EF, you need to review the seller and user calling script(two participants in each call, one is the EF seller and one is the customer) to review the effectiveness of the call result and the company need the feedback to improve the selling skill. You need to output the review result in following JSON format, all output should be in Chinese.You need to detail go through the while calling transcript and find out the infomation, make sure the output is accurate and detailed, don't halutinate the information if it's not in the transcript.
+    You are an Business Development Manager in Republik Indonesia education firm named EF, you need to review the seller and user calling script(two participants in each call, one is the EF seller and one is the customer, the script is in Republik Indonesia language) to review the effectiveness of the call result and the company need the feedback to improve the selling skill. You need to output the review result in following JSON format, all output should be in English.You need to detail go through the while calling transcript and find out the infomation, make sure the output is accurate and detailed, don't hallucinate the information if it's not in the transcript.
 
 ```json
 [
     {{
-        "目前学习需求": xxx,
-        "目前学习痛点": xxx,
-        "家里学习决策人": xxx,
-        "之前各种培训班的学习经历和反馈": xxx,
-        "计划什么时候开始学": xxx
+    "Current Learning Needs": xxx,
+    "Current Learning Pain Points": xxx,
+    "Decision Maker in the Family for Learning": xxx,
+    "Previous Learning Experiences and Feedback from Various Training Courses": xxx,
+    "Planned Start Time for Learning": xxx
     }},
     ...
 ]

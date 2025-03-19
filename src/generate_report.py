@@ -12,12 +12,11 @@ def generate_report(output_directory: str, excel_file: str, markdown_file: str):
                 content = json.load(f)
                 data.append([
                     content.get("call_id", ""),
-                    content.get("transcribed_content", ""),
                     content.get("analysis_result", "")
                 ])
 
     # Create a DataFrame
-    df = pd.DataFrame(data, columns=["Audio File", "Transcription Result", "Analysis Result"])
+    df = pd.DataFrame(data, columns=["Audio File", "Analysis Result"])
 
     # Save to Excel
     df.to_excel(excel_file, index=False)

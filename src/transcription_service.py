@@ -30,7 +30,8 @@ class TranscriptionService:
             audio_file = wav_file
 
         audio_config = speechsdk.audio.AudioConfig(filename=audio_file)
-        conversation_transcriber = speechsdk.transcription.ConversationTranscriber(speech_config=self.speech_config, language='zh-CN',audio_config=audio_config)
+        #conversation_transcriber = speechsdk.transcription.ConversationTranscriber(speech_config=self.speech_config, language='zh-CN',audio_config=audio_config)
+        conversation_transcriber = speechsdk.transcription.ConversationTranscriber(speech_config=self.speech_config, language='id-ID',audio_config=audio_config)
 
         transcribing_stop = False
         all_recognized_text = []  # List to store all recognized text
